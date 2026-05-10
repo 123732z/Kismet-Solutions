@@ -587,6 +587,12 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
       </div>
     </div>
     <div class="ct-form reveal d1">
+  <div id="f-success" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;gap:1.5rem;">
+    <div style="font-size:2.5rem;">&#10003;</div>
+    <p style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:rgba(242,236,224,0.95);">Anfrage erhalten!</p>
+    <p style="font-size:0.9rem;color:rgba(242,236,224,0.5);line-height:1.7;">Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen.</p>
+  </div>
+  <div id="f-form">
       <div class="frow">
         <div class="fg"><label>Vorname</label><input type="text" id="f-vorname" placeholder="Max"></div>
         <div class="fg"><label>Nachname</label><input type="text" id="f-nachname" placeholder="Mustermann"></div>
@@ -605,6 +611,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
       <div class="fg"><label>Ihre Nachricht</label><textarea id="f-nachricht" placeholder="Was kostet Sie heute am meisten Zeit?"></textarea></div>
       <button class="btn-send" id="f-btn" onclick="sendForm(event)">Anfrage senden</button>
       <p id="f-status" style="margin-top:1rem;font-size:0.82rem;text-align:center;color:rgba(242,236,224,0.5);min-height:1.4rem;"></p>
+  </div>
     </div>
   </div>
 </section>
@@ -633,12 +640,32 @@ function sendForm(e){
   e.preventDefault();
   var btn=document.getElementById("f-btn");
   var status=document.getElementById("f-status");
+  var form=document.getElementById("f-form");
+  var success=document.getElementById("f-success");
   var vorname=document.getElementById("f-vorname").value.trim();
-  var email=document.getElementById("f-email").value.trim();
   var nachricht=document.getElementById("f-nachricht").value.trim();
-  if(!vorname||!email||!nachricht){status.style.color="rgba(220,80,60,0.9)";status.textContent="Bitte füllen Sie alle Felder aus.";return;}
+  if(!vorname||!nachricht){
+    status.style.color="rgba(220,80,60,0.9)";
+    status.textContent="Bitte füllen Sie Vorname und Nachricht aus.";
+    return;
+  }
   btn.textContent="Wird gesendet...";btn.disabled=true;btn.style.opacity="0.7";
-  emailjs.send("service_g1ooo2t","template_7gmvfie",{
+  emailjs.send("service_y0tl1ov","template_7gmvfie",{
+    from_name:vorname+" "+document.getElementById("f-nachname").value.trim(),
+    firma:document.getElementById("f-firma").value.trim()||"Keine Angabe",
+    anliegen:document.getElementById("f-anliegen").value,
+    nachricht:nachricht
+  }).then(function(){
+    if(form)form.style.display="none";
+    if(success)success.style.display="flex";
+  }).catch(function(){
+    btn.textContent="Anfrage senden";btn.disabled=false;btn.style.opacity="1";
+    status.style.color="rgba(220,80,60,0.9)";
+    status.textContent="Fehler. Schreiben Sie direkt: info@kismet-solutions.ch";
+  });
+}
+  btn.textContent="Wird gesendet...";btn.disabled=true;btn.style.opacity="0.7";
+  emailjs.send("service_y0tl1ov","template_7gmvfie",{
     from_name:vorname+" "+document.getElementById("f-nachname").value.trim(),
     from_email:email,
     firma:document.getElementById("f-firma").value.trim()||"Keine Angabe",
