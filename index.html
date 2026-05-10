@@ -189,6 +189,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
   .vg-grid{grid-template-columns:1fr;}.vg-accent{grid-column:span 1;flex-direction:column;gap:2rem;}
   
   .nav-ul{display:none;}
+  .nav-cta{display:none !important;}
 }
 @media(max-width:600px){
   .ub-cards{grid-template-columns:1fr;}.frow{grid-template-columns:1fr;}
@@ -207,6 +208,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
   /* NAV */
   nav{padding:1rem 5%;}
   .nav-ul{display:none;}
+  .nav-cta{display:none !important;}
   .nav-cta{
     font-size:0.65rem;padding:0.55rem 1.1rem;
     letter-spacing:0.1em;
@@ -589,7 +591,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
         </select>
       </div>
       <div class="fg"><label>Ihre Nachricht</label><textarea id="f-nachricht" placeholder="Was kostet Sie heute am meisten Zeit?"></textarea></div>
-      <button class="btn-send" id="f-btn" onclick="sendForm(event)">Kostenloses Erstgespräch anfragen</button>
+      <button class="btn-send" id="f-btn" onclick="sendForm(event)">Anfrage senden</button>
       <p id="f-status" style="margin-top:1rem;font-size:0.82rem;text-align:center;color:rgba(242,236,224,0.5);min-height:1.4rem;"></p>
     </div>
   </div>
