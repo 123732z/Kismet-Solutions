@@ -417,8 +417,20 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
-  <a href="#kontakt" class="nav-cta">Kostenlos starten</a>
+  <a href="#kontakt" class="nav-cta">Kontakt</a>
+  <button class="hamburger" onclick="document.getElementById('mob-menu').classList.add('open')" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mob-menu">
+  <button class="mobile-close" onclick="document.getElementById('mob-menu').classList.remove('open')">&#x2715;</button>
+  <a href="#ueber" onclick="document.getElementById('mob-menu').classList.remove('open')">Über uns</a>
+  <a href="#leistungen" onclick="document.getElementById('mob-menu').classList.remove('open')">Leistungen</a>
+  <a href="#vorgehen" onclick="document.getElementById('mob-menu').classList.remove('open')">Vorgehen</a>
+  <a href="#faq" onclick="document.getElementById('mob-menu').classList.remove('open')">FAQ</a>
+  <a href="#kontakt" onclick="document.getElementById('mob-menu').classList.remove('open')">Gespräch starten</a>
+</div>
 <section class="hero">
   <div class="hero-bg-grid"></div>
   <div class="hero-bg-fade"></div>
@@ -523,7 +535,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
     <div class="vg-cell"><span class="vg-n">2</span><h4>Schriftliches Angebot</h4><p>Sie erhalten ein verbindliches Angebot mit Umfang, Zeitplan und Fixpreis. Alles ist festgelegt, bevor wir beginnen.</p></div>
     <div class="vg-cell"><span class="vg-n">3</span><h4>Schrittweise Entwicklung</h4><p>Wir bauen in Etappen mit regelmässigen Zwischenständen. Ihr Feedback fliesst direkt ein.</p></div>
     <div class="vg-cell"><span class="vg-n">4</span><h4>Übergabe mit Schulung</h4><p>Sie erhalten Zugangsdaten, Dokumentation und Schulung, damit Ihr Team alles eigenständig bedienen kann.</p></div>
-    <div class="vg-accent"><p>Das erste Gespräch kostet nichts und verpflichtet zu nichts.</p><a href="#kontakt">Kostenloses Erstgespräch sichern</a></div>
+    <div class="vg-accent"><p>Bereit loszulegen? Das erste Gespräch ist kostenlos und unverbindlich.</p><a href="#kontakt">Jetzt Kontakt aufnehmen</a></div>
   </div>
 </section>
 
