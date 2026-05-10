@@ -567,7 +567,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
       <div class="h2">Schreiben<br>Sie <em>uns.</em></div>
       <p class="ct-lead">Schildern Sie kurz, welche Prozesse Zeit kosten oder fehleranfaellig sind. Sie erhalten innerhalb von 24 Stunden eine persönliche und unverbindliche Rückmeldung.</p>
       <div class="ct-pts">
-        <div class="ct-pt"><small>E-Mail</small><strong>rejhankismet&#64;gmail&#46;com</strong></div>
+        <div class="ct-pt"><small>E-Mail</small><strong>info&#64;kismet-solutions&#46;ch</strong></div>
         <div class="ct-pt"><small>Telefon und WhatsApp</small><strong>+41 76 796 62 41</strong></div>
         <div class="ct-pt"><small>Standort</small><strong>St. Gallen, Schweiz</strong></div>
       </div>
@@ -630,14 +630,14 @@ function sendForm(e){
     firma:document.getElementById("f-firma").value.trim()||"Keine Angabe",
     anliegen:document.getElementById("f-anliegen").value,
     nachricht:nachricht,
-    to_email:"rejhankismet@gmail.com"
+    to_email:"info@kismet-solutions.ch"
   }).then(function(){
     btn.textContent="Gesendet";btn.style.background="#4a7a28";btn.style.opacity="1";
     status.style.color="rgba(100,200,80,0.9)";status.textContent="Vielen Dank. Sie erhalten innerhalb von 24 Stunden eine persönliche Rückmeldung.";
     ["f-vorname","f-nachname","f-email","f-firma","f-nachricht"].forEach(function(id){document.getElementById(id).value="";});
   }).catch(function(){
     btn.textContent="Nachricht absenden";btn.disabled=false;btn.style.opacity="1";
-    status.style.color="rgba(220,80,60,0.9)";status.textContent="Fehler beim Senden. Schreiben Sie direkt: rejhankismet@gmail.com";
+    status.style.color="rgba(220,80,60,0.9)";status.textContent="Fehler beim Senden. Schreiben Sie direkt: info@kismet-solutions.ch";
   });
 }
 (function(){var c=document.getElementById("ueber-canvas");if(!c)return;var ctx=c.getContext("2d");var W,H,t=0;function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}rs();window.addEventListener("resize",rs);function draw(){ctx.clearRect(0,0,W,H);for(var i=0;i<4;i++){var cx2=W*.5+Math.sin(t*.3+i*1.2)*W*.12,cy2=H*.5+Math.cos(t*.25+i)*H*.1,r=100+i*80+Math.sin(t*.4+i)*18;ctx.beginPath();ctx.arc(cx2,cy2,r,0,Math.PI*2);ctx.strokeStyle="rgba(184,68,32,"+(0.055-i*0.01)+")";ctx.lineWidth=1;ctx.stroke();}t+=.005;requestAnimationFrame(draw);}draw();})();
