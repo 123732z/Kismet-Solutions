@@ -396,6 +396,7 @@ function sendForm(e){
   btn.textContent="Wird gesendet...";btn.disabled=true;
   emailjs.send("service_y0tl1ov","template_7gmvfie",{
     from_name:vorname+" "+document.getElementById("f-nachname").value.trim(),
+    from_email:document.getElementById("f-email").value.trim(),
     firma:document.getElementById("f-firma").value.trim()||"Keine Angabe",
     anliegen:document.getElementById("f-anliegen").value,
     nachricht:nachricht
