@@ -72,6 +72,9 @@ h1 .fire{color:var(--fire);}
 .h2{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,4.5vw,4.2rem);font-weight:900;line-height:0.95;letter-spacing:-0.02em;color:var(--ink);margin-bottom:1.6rem;}
 .h2 em{font-style:italic;color:var(--fire);}
 .body-t{color:var(--mid);font-size:1rem;line-height:1.88;font-weight:300;max-width:520px;}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}
 #über{background:var(--bg);position:relative;overflow:hidden;padding:0;}
 #über-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 .ub-wrap{position:relative;z-index:1;}
@@ -213,7 +216,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
   <div class="hero-bg-grid"></div>
   <div class="hero-bg-fade"></div>
   <div class="hero-l">
-    <p class="hero-tag">Digitale Automatisierung &#xB7; St. Gallen</p>
+    <p class="hero-tag">Digitale Automatisierung</p>
     <h1>Arbeit,<br><span class="stroke">die von</span><br><span class="fire">selbst läuft.</span></h1>
     <p class="hero-p">Wir entwickeln Bots, Automationen und digitale Systeme, die wiederkehrende Aufgaben in Ihrem Unternehmen übernehmen &#x2014; damit Sie sich auf das konzentrieren können, was wirklich zählt.</p>
     <div class="hero-btns">
@@ -243,7 +246,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
 <section id="über" class="section" style="padding:0;">
   <canvas id="über-canvas"></canvas>
   <div class="ub-wrap">
-    <div class="ub-banner">
+    <div class="ub-banner reveal">
       <div class="ub-vis"><canvas id="gear-c"></canvas></div>
       <div class="ub-copy">
         <p class="lbl">Wer wir sind</p>
@@ -252,7 +255,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
         <p>Jedes Projekt wird von einer Person von Anfang bis Ende begleitet.</p>
       </div>
     </div>
-    <div class="ub-cards">
+    <div class="ub-cards reveal d1">
       <div class="ub-card"><span class="ub-card-bg">A</span><h3>Direkter Kontakt</h3><p>Sie erreichen jederzeit die Person, die Ihr Projekt kennt und umsetzt.</p></div>
       <div class="ub-card"><span class="ub-card-bg">B</span><h3>Vollständiges Eigentum</h3><p>Code, Dokumentation und alle Zugangsdaten werden vollständig übergeben.</p></div>
       <div class="ub-card"><span class="ub-card-bg">C</span><h3>Fixpreis vor Start</h3><p>Umfang, Zeitplan und Kosten sind verbindlich vor dem ersten Schritt festgelegt.</p></div>
@@ -263,11 +266,11 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
 
 <section id="leistungen" class="section">
   <canvas id="leis-canvas"></canvas>
-  <div class="sv-head">
+  <div class="sv-head reveal">
     <div><p class="lbl">Was wir bauen</p><div class="h2">Unsere<br><em>Leistungen</em></div></div>
     <p class="body-t">Jede Lösung entsteht von Grund auf für Ihren Betrieb.</p>
   </div>
-  <div class="sv-list">
+  <div class="sv-list reveal d1">
     <div class="sv"><span class="sv-n">01</span><h3>Chat-Bots und Assistenzsysteme</h3><p>Automatisierte Gesprächssysteme für Kundenanfragen und interne Abläufe. Rund um die Uhr verfuegbar.</p></div>
     <div class="sv"><span class="sv-n">02</span><h3>Workflow-Automatisierung</h3><p>Wiederkehrende Abläufe werden vollständig automatisiert und laufen ohne manuelles Zutun.</p></div>
     <div class="sv"><span class="sv-n">03</span><h3>System-Integration</h3><p>CRM, ERP, Onlineshop und Buchhaltungssoftware werden miteinander verbunden.</p></div>
@@ -279,18 +282,18 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
 
 <div class="strip">
   <canvas id="strip-canvas"></canvas>
-  <div class="strip-item"><span class="strip-icon">01</span><p class="strip-statement">Ich liefere, was ich verspreche &#x2014; mit Fixpreis und schriftlichem Angebot vor dem ersten Schritt.</p></div>
+  <div class="strip-item"><span class="strip-icon">01</span><p class="strip-statement">Fixpreis und schriftliches Angebot vor dem ersten Schritt. Transparent von Anfang bis Ende.</p></div>
   <div class="strip-item"><span class="strip-icon">02</span><p class="strip-statement">Jedes System, das ich baue, gehört vollständig Ihnen &#x2014; kein Lock-in, kein Abo, keine Abhängigkeit.</p></div>
-  <div class="strip-item"><span class="strip-icon">03</span><p class="strip-statement">Sie sprechen immer direkt mit mir &#x2014; der Person, die Ihr Projekt von Anfang bis Ende umsetzt.</p></div>
+  <div class="strip-item"><span class="strip-icon">03</span><p class="strip-statement">Direkter Kontakt, pers&#xF6;nliche Begleitung und schnelle Reaktionszeiten bei jedem Projekt.</p></div>
 </div>
 
 <section id="vorgehen" class="section">
   <canvas id="vg-canvas"></canvas>
-  <div class="vg-head">
+  <div class="vg-head reveal">
     <div><p class="lbl">Wie wir arbeiten</p><div class="h2">Unser<br><em>Vorgehen</em></div></div>
     <p class="body-t">Jede Zusammenarbeit folgt einem klaren Ablauf.</p>
   </div>
-  <div class="vg-grid">
+  <div class="vg-grid reveal d1">
     <div class="vg-cell"><span class="vg-n">1</span><h4>Erstgespräch</h4><p>Wir besprechen Ihre Abläufe und identifizieren, welche Prozesse sich eignen. Kostenlos und unverbindlich.</p></div>
     <div class="vg-cell"><span class="vg-n">2</span><h4>Schriftliches Angebot</h4><p>Sie erhalten ein verbindliches Angebot mit Umfang, Zeitplan und Fixpreis.</p></div>
     <div class="vg-cell"><span class="vg-n">3</span><h4>Schrittweise Entwicklung</h4><p>Wir bauen in Etappen mit regelmässigen Zwischenständen. Ihr Feedback fliesst direkt ein.</p></div>
@@ -300,7 +303,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
 </section>
 
 <section id="faq" class="section">
-  <div class="faq-wrap">
+  <div class="faq-wrap reveal">
     <div>
       <p class="lbl">Häufige Fragen</p>
       <div class="h2">Was Sie<br><em>wissen möchten</em></div>
@@ -316,7 +319,7 @@ footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;j
 </section>
 
 <section id="kontakt" class="section">
-  <div class="ct-wrap">
+  <div class="ct-wrap reveal">
     <div>
       <p class="lbl">Kontakt</p>
       <div class="h2">Schreiben<br>Sie <em>uns.</em></div>
@@ -377,6 +380,10 @@ var dot=document.getElementById("dot"),ring=document.getElementById("ring");
 var mx=0,my=0,rx=0,ry=0;
 document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;});
 (function L(){dot.style.left=mx+"px";dot.style.top=my+"px";rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(L);})();
+
+// Scroll reveal
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("in");});},{threshold:.07});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
 
 // Nav active
 var nls=document.querySelectorAll(".nav-ul a");
