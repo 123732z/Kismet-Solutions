@@ -1,436 +1,363 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kismet Solutions - Automatisierung, Bots & System-Integration</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzE0MTAwYSIvPjx0ZXh0IHg9IjMyIiB5PSIyNiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjYjg0NDIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5LPC90ZXh0Pjx0ZXh0IHg9IjMyIiB5PSI0NiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjZjJlY2UwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TPC90ZXh0Pjwvc3ZnPg==">
-<meta name="description" content="Kismet Solutions entwickelt massgeschneiderte Bots, Automationen und System-Integrationen für Unternehmen und Privatpersonen.">
-<meta name="google-site-verification" content="z4Z2LfYKo_N1PSS--Pj7ljZ4J_-7iXAmvwea3eNyDZg">
-<meta name="google-site-verification" content="C-P8v1QR4CAq4umI7BqjTYaIrjV9VuHtn7_tu-JNTjc">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#f2ece0;--bg2:#ebe3d5;--bg3:#e2d8c8;
-  --ink:#14100a;--mid:#5e5447;
-  --fire:#b84420;--fire2:#7e2e10;
-  --line:rgba(20,16,10,0.1);
-}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--ink);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
-#dot{position:fixed;width:7px;height:7px;background:var(--fire);border-radius:50%;pointer-events:none;z-index:9000;transform:translate(-50%,-50%);}
-#ring{position:fixed;width:30px;height:30px;border:1.5px solid rgba(184,68,32,0.4);border-radius:50%;pointer-events:none;z-index:8999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-body:has(a:hover) #ring,body:has(button:hover) #ring{width:46px;height:46px;}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:700;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{font-size:1.4rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--ink);text-decoration:none;}
-.mobile-menu a:last-child{color:var(--fire);}
-.mob-close{position:absolute;top:1.5rem;right:5%;font-size:1.8rem;color:var(--mid);background:none;border:none;cursor:pointer;}
-nav{position:fixed;top:0;left:0;right:0;z-index:600;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 6%;background:rgba(242,236,224,0.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);}
-.logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);text-decoration:none;}
-.logo em{color:var(--fire);font-style:italic;}
-.nav-ul{display:flex;gap:2.5rem;list-style:none;}
-.nav-ul a{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s;}
-.nav-ul a:hover{color:var(--ink);}
-.nav-cta{font-size:0.72rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--bg);background:var(--ink);padding:0.7rem 2rem;border-radius:2px;text-decoration:none;transition:background .2s;}
-.nav-cta:hover{background:var(--fire);}
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:10rem 6% 6rem;gap:6rem;position:relative;overflow:hidden;}
-.hero-bg-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(184,68,32,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(184,68,32,0.06) 1px,transparent 1px);background-size:48px 48px;animation:gridDrift 20s linear infinite;}
-@keyframes gridDrift{0%{background-position:0 0;}100%{background-position:48px 48px;}}
-.hero-bg-fade{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 80% 70% at 30% 50%,rgba(242,236,224,0.95) 30%,rgba(242,236,224,0.75) 60%,rgba(242,236,224,0.2) 100%);}
-.hero-l{position:relative;z-index:2;}
-.hero-tag{font-size:0.68rem;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--fire);margin-bottom:2rem;}
-h1{font-family:'Playfair Display',serif;font-size:clamp(3.6rem,6vw,6.8rem);font-weight:900;line-height:0.93;letter-spacing:-0.02em;color:var(--ink);}
-h1 .stroke{-webkit-text-stroke:2.5px var(--ink);color:transparent;}
-h1 .fire{color:var(--fire);}
-.hero-p{margin-top:2.4rem;font-size:1.05rem;line-height:1.85;color:var(--mid);max-width:460px;font-weight:300;}
-.hero-btns{margin-top:3.2rem;display:flex;align-items:center;gap:2.5rem;}
-.btn-fire{background:var(--fire);color:var(--bg);font-size:0.75rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:1rem 2.8rem;border-radius:2px;text-decoration:none;display:inline-block;transition:background .2s,transform .2s;box-shadow:0 8px 32px rgba(184,68,32,0.28);}
-.btn-fire:hover{background:var(--fire2);transform:translateY(-3px);}
-.btn-plain{font-size:0.75rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid);text-decoration:none;}
-.btn-plain:hover{color:var(--ink);}
-.hero-r{position:relative;z-index:2;}
-.hero-statement{border-left:3px solid var(--fire);padding-left:2.8rem;}
-.hero-statement-text{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.8vw,2.6rem);font-weight:400;font-style:italic;line-height:1.38;color:var(--ink);}
-.hero-statement-text em{color:var(--fire);font-style:normal;}
-.hero-statement-meta{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.4rem;}
-.hero-meta-row{display:flex;align-items:flex-start;gap:1.2rem;}
-.hero-meta-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--fire);line-height:1;flex-shrink:0;min-width:56px;}
-.hero-meta-txt strong{display:block;font-size:0.88rem;font-weight:600;color:var(--ink);margin-bottom:0.15rem;}
-.hero-meta-txt span{font-size:0.8rem;color:var(--mid);font-weight:300;}
-.band{overflow:hidden;background:var(--ink);padding:1.1rem 0;}
-.band-inner{display:flex;white-space:nowrap;animation:bscroll 28s linear infinite;}
-.band-inner s{display:inline-block;font-size:0.65rem;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:rgba(242,236,224,0.35);padding:0 3rem;text-decoration:none;}
-.band-inner em{color:var(--fire);font-style:normal;padding:0;}
-@keyframes bscroll{to{transform:translateX(-50%);}}
-.section{padding:8rem 6%;position:relative;}
-.lbl{font-size:0.65rem;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--fire);margin-bottom:1rem;}
-.h2{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,4.5vw,4.2rem);font-weight:900;line-height:0.95;letter-spacing:-0.02em;color:var(--ink);margin-bottom:1.6rem;}
-.h2 em{font-style:italic;color:var(--fire);}
-.body-t{color:var(--mid);font-size:1rem;line-height:1.88;font-weight:300;max-width:520px;}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
-.reveal.in{opacity:1;transform:translateY(0);}
-.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}
-#über{background:var(--bg);position:relative;overflow:hidden;padding:0;}
-#über-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-.ub-wrap{position:relative;z-index:1;}
-.ub-banner{width:100%;overflow:hidden;margin-bottom:2px;display:grid;grid-template-columns:1fr 1fr;min-height:420px;}
-.ub-vis{position:relative;overflow:hidden;}
-#gear-c{display:block;width:100%;height:100%;min-height:420px;}
-.ub-copy{padding:4rem;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,#1e1710 0%,#14100a 100%);}
-.ub-copy .lbl{color:rgba(184,68,32,0.8);}
-.ub-copy .h2{color:rgba(242,236,224,0.95);font-size:clamp(2rem,3vw,3rem);}
-.ub-copy .h2 em{color:var(--fire);}
-.ub-copy p{font-size:0.96rem;color:rgba(242,236,224,0.55);line-height:1.88;font-weight:300;margin-bottom:1rem;}
-.ub-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);overflow:hidden;margin-top:2px;}
-.ub-card{background:var(--bg);padding:2.8rem 2rem;position:relative;overflow:hidden;transition:background .3s;}
-.ub-card:hover{background:var(--bg2);}
-.ub-card-bg{position:absolute;bottom:0.5rem;right:1rem;font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:rgba(184,68,32,0.06);line-height:1;pointer-events:none;transition:color .3s;}
-.ub-card:hover .ub-card-bg{color:rgba(184,68,32,0.13);}
-.ub-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:0.8rem;position:relative;z-index:1;}
-.ub-card p{font-size:0.86rem;color:var(--mid);line-height:1.78;font-weight:300;position:relative;z-index:1;}
-#leistungen{background:var(--bg2);position:relative;overflow:hidden;}
-#leis-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-.sv-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:3rem;position:relative;z-index:1;}
-.sv-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;position:relative;z-index:1;}
-.sv{background:var(--bg);padding:2.8rem;position:relative;overflow:hidden;transition:background .25s;cursor:default;}
-.sv::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--fire);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
-.sv:hover::before{transform:scaleX(1);}
-.sv:hover{background:var(--bg2);}
-.sv-n{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:rgba(184,68,32,0.12);line-height:1;margin-bottom:1.2rem;display:block;transition:color .3s;}
-.sv:hover .sv-n{color:rgba(184,68,32,0.3);}
-.sv h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:0.65rem;line-height:1.15;}
-.sv p{font-size:0.88rem;color:var(--mid);line-height:1.82;font-weight:300;}
-.strip{background:var(--ink);padding:5rem 6%;position:relative;overflow:hidden;}
-#strip-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
-.strip-item{display:flex;align-items:baseline;gap:2.5rem;padding:2rem 0;border-bottom:1px solid rgba(242,236,224,0.07);position:relative;z-index:1;}
-.strip-item:first-child{border-top:1px solid rgba(242,236,224,0.07);}
-.strip-icon{font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;color:var(--fire);flex-shrink:0;min-width:28px;letter-spacing:0.08em;}
-.strip-statement{font-size:1rem;font-weight:400;color:rgba(242,236,224,0.75);line-height:1.65;}
-#vorgehen{background:var(--bg);position:relative;overflow:hidden;}
-#vg-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-.vg-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:5rem;position:relative;z-index:1;}
-.vg-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;position:relative;z-index:1;}
-.vg-cell{background:var(--bg);padding:3.2rem 2.8rem;position:relative;overflow:hidden;transition:background .3s;}
-.vg-cell:hover{background:var(--bg2);}
-.vg-n{position:absolute;bottom:0.8rem;right:1.4rem;font-family:'Playfair Display',serif;font-size:5.5rem;font-weight:900;color:rgba(184,68,32,0.05);line-height:1;pointer-events:none;}
-.vg-cell h4{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:0.9rem;position:relative;z-index:1;}
-.vg-cell p{font-size:0.9rem;color:var(--mid);line-height:1.82;font-weight:300;position:relative;z-index:1;}
-.vg-accent{grid-column:span 2;background:var(--fire);padding:3.8rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:4rem;transition:background .25s;}
-.vg-accent:hover{background:var(--fire2);}
-.vg-accent p{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;font-style:italic;color:rgba(242,236,224,0.95);line-height:1.5;max-width:600px;position:relative;z-index:1;}
-.vg-accent a{flex-shrink:0;font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(242,236,224,0.92);background:rgba(255,255,255,0.14);padding:1rem 2.4rem;border-radius:2px;text-decoration:none;transition:background .2s;white-space:nowrap;}
-.vg-accent a:hover{background:rgba(255,255,255,0.24);}
-#faq{background:var(--bg3);}
-.faq-wrap{display:grid;grid-template-columns:1fr 2fr;gap:6rem;align-items:start;}
-.faq-list{display:flex;flex-direction:column;}
-.faq-item{border-top:1px solid var(--line);overflow:hidden;}
-.faq-item:last-child{border-bottom:1px solid var(--line);}
-.faq-q{width:100%;background:none;border:none;display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:1.8rem 0;cursor:pointer;text-align:left;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);transition:color .2s;}
-.faq-q:hover{color:var(--fire);}
-.faq-icon{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem;color:var(--mid);transition:transform .35s,border-color .2s,color .2s;}
-.faq-q:hover .faq-icon{border-color:var(--fire);color:var(--fire);}
-.faq-item.open .faq-icon{transform:rotate(45deg);border-color:var(--fire);color:var(--fire);}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),padding .35s;}
-.faq-item.open .faq-a{max-height:400px;padding-bottom:1.8rem;}
-.faq-a p{font-size:0.93rem;color:var(--mid);line-height:1.88;font-weight:300;}
-#kontakt{background:var(--bg2);}
-.ct-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;}
-.ct-lead{font-size:1rem;color:var(--mid);line-height:1.9;font-weight:300;margin:1.4rem 0 3.5rem;}
-.ct-pts{display:flex;flex-direction:column;}
-.ct-pt{padding:1.5rem 0;border-top:1px solid var(--line);}
-.ct-pt:last-child{border-bottom:1px solid var(--line);}
-.ct-pt small{display:block;font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--fire);margin-bottom:0.35rem;}
-.ct-pt strong{font-size:1rem;font-weight:500;color:var(--ink);}
-.ct-form{background:var(--ink);border-radius:4px;padding:3.4rem;position:relative;overflow:hidden;}
-.fg{margin-bottom:1.6rem;}
-.fg label{display:block;font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(242,236,224,0.45);margin-bottom:0.55rem;}
-.fg input,.fg select,.fg textarea{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.11);border-radius:2px;padding:0.95rem 1.1rem;color:rgba(242,236,224,0.92);font-family:'Barlow',sans-serif;font-size:0.92rem;font-weight:300;outline:none;appearance:none;transition:border-color .2s;}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(242,236,224,0.22);}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(184,68,32,0.6);}
-.fg select option{background:var(--ink);color:var(--bg);}
-.fg textarea{resize:vertical;min-height:120px;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
-.btn-send{width:100%;padding:1.15rem;background:var(--fire);color:var(--bg);border:none;border-radius:2px;font-family:'Barlow',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .2s;margin-top:0.5rem;}
-.btn-send:hover{background:var(--fire2);transform:translateY(-2px);}
-.f-success{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;gap:1.5rem;}
-.f-success-check{font-size:3rem;color:var(--fire);}
-.f-success h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:rgba(242,236,224,0.95);}
-.f-success p{font-size:0.9rem;color:rgba(242,236,224,0.5);line-height:1.7;max-width:300px;}
-footer{background:var(--ink);padding:3.2rem 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
-.f-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--bg);text-decoration:none;}
-.f-logo em{color:var(--fire);font-style:italic;}
-.f-nav{display:flex;gap:2.5rem;list-style:none;}
-.f-nav a{font-size:0.68rem;color:rgba(242,236,224,0.38);text-decoration:none;letter-spacing:0.16em;text-transform:uppercase;transition:color .2s;}
-.f-nav a:hover{color:var(--bg);}
-.f-copy{font-size:0.68rem;color:rgba(242,236,224,0.28);}
-@media(max-width:960px){
-  .hero{grid-template-columns:1fr;padding-top:8rem;gap:4rem;}.hero-r{display:none;}
-  .ub-banner,.sv-head,.vg-head,.ct-wrap,.faq-wrap{grid-template-columns:1fr;gap:3rem;}
-  .ub-cards{grid-template-columns:1fr 1fr;}
-  .sv-list{grid-template-columns:1fr;}
-  .vg-grid{grid-template-columns:1fr;}.vg-accent{grid-column:span 1;flex-direction:column;gap:2rem;}
-  .nav-ul{display:none;}.nav-cta{display:none;}
-  .hamburger{display:flex;}
-}
-@media(max-width:600px){
-  .ub-cards{grid-template-columns:1fr;}.frow{grid-template-columns:1fr;}
-  body{cursor:auto;}#dot,#ring{display:none;}
-  h1{font-size:3rem;}.h2{font-size:2.2rem;}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kismet Solutions – Bot Entwicklung & Automatisierung | Schweiz</title>
+  <meta name="description" content="Kismet Solutions entwickelt massgeschneiderte Bots, Automatisierungssysteme und digitale Prozesslösungen für Unternehmen und KMU. Systemintegration, Bot-Entwicklung und KI-Automatisierung – projektbasiert und auf Anfrage." />
+  <meta name="keywords" content="Bot Entwicklung, Automatisierung, Systemintegration, KI Automatisierung, digitale Prozesse, Bots, interne Tools, Datenverarbeitung, Prozessautomatisierung, KMU Automatisierung, Software Automatisierung, Workflow Automatisierung" />
+  <meta name="author" content="Kismet Solutions" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Kismet Solutions – Bot Entwicklung & Automatisierung" />
+  <meta property="og:description" content="Massgeschneiderte Bots, Automatisierungssysteme und digitale Prozesslösungen für Unternehmen und KMU." />
+  <meta property="og:url" content="https://www.kismet-solutions.ch" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://www.kismet-solutions.ch" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-<div id="dot"></div>
-<div id="ring"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-<div class="mobile-menu" id="mob-menu">
-  <button class="mob-close" onclick="document.getElementById('mob-menu').classList.remove('open')">&#x2715;</button>
-  <a href="#über" onclick="document.getElementById('mob-menu').classList.remove('open')">Über uns</a>
-  <a href="#leistungen" onclick="document.getElementById('mob-menu').classList.remove('open')">Leistungen</a>
-  <a href="#vorgehen" onclick="document.getElementById('mob-menu').classList.remove('open')">Vorgehen</a>
-  <a href="#faq" onclick="document.getElementById('mob-menu').classList.remove('open')">FAQ</a>
-  <a href="#kontakt" onclick="document.getElementById('mob-menu').classList.remove('open')">Gespräch starten</a>
-</div>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-a"></span>
+    <span class="orb orb-b"></span>
+    <span class="orb orb-c"></span>
+  </div>
 
-<nav>
-  <a href="#" class="logo">Kismet <em>Solutions</em></a>
-  <ul class="nav-ul">
-    <li><a href="#über">Über uns</a></li>
-    <li><a href="#leistungen">Leistungen</a></li>
-    <li><a href="#vorgehen">Vorgehen</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-  <a href="#kontakt" class="nav-cta">Kontakt</a>
-  <button class="hamburger" onclick="document.getElementById('mob-menu').classList.add('open')">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-lines" aria-hidden="true"></div>
 
-<section class="hero">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-bg-fade"></div>
-  <div class="hero-l">
-    <p class="hero-tag">Digitale Automatisierung</p>
-    <h1>Arbeit,<br><span class="stroke">die von</span><br><span class="fire">selbst läuft.</span></h1>
-    <p class="hero-p">Wir entwickeln Bots, Automationen und digitale Systeme, die wiederkehrende Aufgaben in Ihrem Unternehmen übernehmen &#x2014; damit Sie sich auf das konzentrieren können, was wirklich zählt.</p>
-    <div class="hero-btns">
-      <a href="#kontakt" class="btn-fire">Projekt besprechen</a>
-      <a href="#leistungen" class="btn-plain">Leistungen ansehen</a>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#top" aria-label="Zur Startseite">
+        <span class="brand__dot"></span>
+        <span class="brand__name">Kismet Solutions</span>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation" id="main-nav">
+        <a href="#overview">Überblick</a>
+        <a href="#services">Leistungen</a>
+        <a href="#request" class="nav__cta">Anfrage</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </div>
-  <div class="hero-r">
-    <div class="hero-statement">
-      <p class="hero-statement-text">Was sich in Ihrem Betrieb täglich wiederholt, sollte <em>kein Mensch</em> mehr manuell erledigen müssen.</p>
-      <div class="hero-statement-meta">
-        <div class="hero-meta-row"><span class="hero-meta-num">01</span><div class="hero-meta-txt"><strong>Massgeschneidert</strong><span>Jede Lösung entsteht exakt für Ihren Betrieb.</span></div></div>
-        <div class="hero-meta-row"><span class="hero-meta-num">02</span><div class="hero-meta-txt"><strong>Direkt und persönlich</strong><span>Sie arbeiten mit der Person zusammen, die Ihr System baut.</span></div></div>
-        <div class="hero-meta-row"><span class="hero-meta-num">03</span><div class="hero-meta-txt"><strong>Fixpreis, kein Risiko</strong><span>Verbindliches Angebot vor dem ersten Schritt.</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+  </header>
 
-<div class="band">
-  <div class="band-inner">
-    <s>Automatisierung</s><em>&#xB7;</em><s>Bot-Entwicklung</s><em>&#xB7;</em><s>System-Integration</s><em>&#xB7;</em><s>Digitale Infrastruktur</s><em>&#xB7;</em><s>Prozessoptimierung</s><em>&#xB7;</em><s>Individuelle Software</s><em>&#xB7;</em>
-    <s>Automatisierung</s><em>&#xB7;</em><s>Bot-Entwicklung</s><em>&#xB7;</em><s>System-Integration</s><em>&#xB7;</em><s>Digitale Infrastruktur</s><em>&#xB7;</em><s>Prozessoptimierung</s><em>&#xB7;</em><s>Individuelle Software</s><em>&#xB7;</em>
-  </div>
-</div>
+  <main id="top">
 
-<section id="über" class="section" style="padding:0;">
-  <canvas id="über-canvas"></canvas>
-  <div class="ub-wrap">
-    <div class="ub-banner reveal">
-      <div class="ub-vis"><canvas id="gear-c"></canvas></div>
-      <div class="ub-copy">
-        <p class="lbl">Wer wir sind</p>
-        <div class="h2">Spezialisiert.<br><em>Persönlich.</em></div>
-        <p>Kismet Solutions ist eine Agentur aus St. Gallen, die Unternehmen dabei hilft, ihre Arbeitsabläufe zu automatisieren und digitale Infrastruktur aufzubauen, die langfristig funktioniert.</p>
-        <p>Jedes Projekt wird von einer Person von Anfang bis Ende begleitet.</p>
-      </div>
-    </div>
-    <div class="ub-cards reveal d1">
-      <div class="ub-card"><span class="ub-card-bg">A</span><h3>Direkter Kontakt</h3><p>Sie erreichen jederzeit die Person, die Ihr Projekt kennt und umsetzt.</p></div>
-      <div class="ub-card"><span class="ub-card-bg">B</span><h3>Vollständiges Eigentum</h3><p>Code, Dokumentation und alle Zugangsdaten werden vollständig übergeben.</p></div>
-      <div class="ub-card"><span class="ub-card-bg">C</span><h3>Fixpreis vor Start</h3><p>Umfang, Zeitplan und Kosten sind verbindlich vor dem ersten Schritt festgelegt.</p></div>
-      <div class="ub-card"><span class="ub-card-bg">D</span><h3>Für jeden</h3><p>Unternehmen, Privatpersonen, Vereine &#x2014; wer immer wiederkehrende Aufgaben hat, kann davon profitieren.</p></div>
-    </div>
-  </div>
-</section>
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__left">
+          <div class="pill">
+            <span class="pill__spark"></span>
+            Projektbasiert und ausschließlich auf Anfrage
+          </div>
 
-<section id="leistungen" class="section">
-  <canvas id="leis-canvas"></canvas>
-  <div class="sv-head reveal">
-    <div><p class="lbl">Was wir bauen</p><div class="h2">Unsere<br><em>Leistungen</em></div></div>
-    <p class="body-t">Jede Lösung entsteht von Grund auf für Ihren Betrieb.</p>
-  </div>
-  <div class="sv-list reveal d1">
-    <div class="sv"><span class="sv-n">01</span><h3>Chat-Bots und Assistenzsysteme</h3><p>Automatisierte Gesprächssysteme für Kundenanfragen und interne Abläufe. Rund um die Uhr verfuegbar.</p></div>
-    <div class="sv"><span class="sv-n">02</span><h3>Workflow-Automatisierung</h3><p>Wiederkehrende Abläufe werden vollständig automatisiert und laufen ohne manuelles Zutun.</p></div>
-    <div class="sv"><span class="sv-n">03</span><h3>System-Integration</h3><p>CRM, ERP, Onlineshop und Buchhaltungssoftware werden miteinander verbunden.</p></div>
-    <div class="sv"><span class="sv-n">04</span><h3>Software-Roboter</h3><p>Für Systeme ohne Schnittstelle übernehmen Roboter das Ausfüllen von Formularen und das Übertragen von Daten.</p></div>
-    <div class="sv"><span class="sv-n">05</span><h3>Automatisches Reporting</h3><p>Berichte erstellen sich täglich oder wöchentlich selbst und erscheinen direkt in Ihrem Postfach.</p></div>
-    <div class="sv"><span class="sv-n">06</span><h3>Individuelle Software</h3><p>Wenn kein bestehendes Tool passt, entwickeln wir es von Grund auf &#x2014; massgeschneidert und in Ihrem Besitz.</p></div>
-  </div>
-</section>
+          <h1 class="hero__title">
+            Systeme und Bots, die Arbeit automatisieren<br>
+            und stabile digitale Prozesse schaffen
+          </h1>
 
-<div class="strip">
-  <canvas id="strip-canvas"></canvas>
-  <div class="strip-item"><span class="strip-icon">01</span><p class="strip-statement">Fixpreis und schriftliches Angebot vor dem ersten Schritt. Transparent von Anfang bis Ende.</p></div>
-  <div class="strip-item"><span class="strip-icon">02</span><p class="strip-statement">Jedes System, das ich baue, gehört vollständig Ihnen &#x2014; kein Lock-in, kein Abo, keine Abhängigkeit.</p></div>
-  <div class="strip-item"><span class="strip-icon">03</span><p class="strip-statement">Direkter Kontakt, pers&#xF6;nliche Begleitung und schnelle Reaktionszeiten bei jedem Projekt.</p></div>
-</div>
+          <p class="hero__subtitle">
+            Kismet Solutions entwickelt massgeschneiderte Automatisierungssysteme, Bots und interne Softwarelösungen für Unternehmen, KMU und Privatpersonen.
+            <br><br>
+            Unser Ziel ist keine Technologie um der Technologie willen — sondern klare, stabile Prozesse die wiederkehrende Aufgaben automatisch erledigen und Ressourcen freisetzen.
+            <br><br>
+            Unsere Systeme übernehmen Aufgaben wie Datenverarbeitung, Dokumentabläufe, KI-gestützte Automatisierungen und die Verbindung verschiedener Softwarelösungen.
+          </p>
 
-<section id="vorgehen" class="section">
-  <canvas id="vg-canvas"></canvas>
-  <div class="vg-head reveal">
-    <div><p class="lbl">Wie wir arbeiten</p><div class="h2">Unser<br><em>Vorgehen</em></div></div>
-    <p class="body-t">Jede Zusammenarbeit folgt einem klaren Ablauf.</p>
-  </div>
-  <div class="vg-grid reveal d1">
-    <div class="vg-cell"><span class="vg-n">1</span><h4>Erstgespräch</h4><p>Wir besprechen Ihre Abläufe und identifizieren, welche Prozesse sich eignen. Kostenlos und unverbindlich.</p></div>
-    <div class="vg-cell"><span class="vg-n">2</span><h4>Schriftliches Angebot</h4><p>Sie erhalten ein verbindliches Angebot mit Umfang, Zeitplan und Fixpreis.</p></div>
-    <div class="vg-cell"><span class="vg-n">3</span><h4>Schrittweise Entwicklung</h4><p>Wir bauen in Etappen mit regelmässigen Zwischenständen. Ihr Feedback fliesst direkt ein.</p></div>
-    <div class="vg-cell"><span class="vg-n">4</span><h4>Übergabe mit Schulung</h4><p>Sie erhalten Zugangsdaten, Dokumentation und Schulung für eigenständigen Betrieb.</p></div>
-    <div class="vg-accent"><p>Das erste Gespräch kostet nichts und verpflichtet zu nichts.</p><a href="#kontakt">Jetzt Kontakt aufnehmen</a></div>
-  </div>
-</section>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#request">Projekt anfragen</a>
+            <a class="btn btn--ghost" href="#services">Leistungen ansehen</a>
+          </div>
 
-<section id="faq" class="section">
-  <div class="faq-wrap reveal">
-    <div>
-      <p class="lbl">Häufige Fragen</p>
-      <div class="h2">Was Sie<br><em>wissen möchten</em></div>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Was kostet ein Projekt ungefaehr?<span class="faq-icon">+</span></button><div class="faq-a"><p>Das hängt vom Umfang ab. Vor jedem Projekt erhalten Sie ein verbindliches Angebot mit Fixpreis, ohne versteckte Kosten.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Wie lange dauert die Umsetzung?<span class="faq-icon">+</span></button><div class="faq-a"><p>Einfachere Systeme sind oft innerhalb von ein bis zwei Wochen produktiv. Grössere Projekte dauern vier bis acht Wochen.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Brauche ich technisches Wissen?<span class="faq-icon">+</span></button><div class="faq-a"><p>Nein. Wir erklären alles in normaler Sprache und schulen Ihr Team so, dass es alles selbständig bedienen kann.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Für wen ist das sinnvoll?<span class="faq-icon">+</span></button><div class="faq-a"><p>Für Unternehmen, Privatpersonen und alle, die wiederkehrende Aufgaben automatisieren möchten. Ich entwickle Bots, Systeme und digitale Infrastruktur für jeden.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Gehört mir die Lösung vollständig?<span class="faq-icon">+</span></button><div class="faq-a"><p>Ja, vollständig. Quellcode, Zugangsdaten und Dokumentation gehören Ihnen. Kein Monatsabo, kein Lock-in.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="kontakt" class="section">
-  <div class="ct-wrap reveal">
-    <div>
-      <p class="lbl">Kontakt</p>
-      <div class="h2">Schreiben<br>Sie <em>uns.</em></div>
-      <p class="ct-lead">Schildern Sie kurz, welche Prozesse Zeit kosten. Wir melden uns persönlich innerhalb von 24 Stunden.</p>
-      <div class="ct-pts">
-        <div class="ct-pt"><small>E-Mail</small><strong>info&#64;kismet-solutions&#46;ch</strong></div>
-        <div class="ct-pt"><small>Telefon und WhatsApp</small><strong>+41 76 796 62 41</strong></div>
-        <div class="ct-pt"><small>Standort</small><strong>St. Gallen, Schweiz</strong></div>
-      </div>
-    </div>
-    <div class="ct-form">
-      <div class="f-success" id="f-success">
-        <div class="f-success-check">&#10003;</div>
-        <h3>Anfrage erhalten!</h3>
-        <p>Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen.</p>
-      </div>
-      <div id="f-form">
-        <div class="frow">
-          <div class="fg"><label>Vorname *</label><input type="text" id="f-vorname" placeholder="Max" required></div>
-          <div class="fg"><label>Nachname *</label><input type="text" id="f-nachname" placeholder="Mustermann" required></div>
+          <div class="hero__badges">
+            <span class="badge">Automatisierung</span>
+            <span class="badge">Systemintegration</span>
+            <span class="badge">Interne Tools</span>
+            <span class="badge">Betriebsstabilität</span>
+          </div>
         </div>
-        <div class="fg"><label>E-Mail-Adresse *</label><input type="email" id="f-email" placeholder="max@firma.ch" required></div>
-        <div class="fg"><label>Unternehmen (optional)</label><input type="text" id="f-firma" placeholder="Mustermann AG"></div>
-        <div class="fg"><label>Ihr Anliegen</label>
-          <select id="f-anliegen">
-            <option>Prozessautomatisierung</option>
-            <option>Chat-Bot oder Assistenzsystem</option>
-            <option>System-Integration</option>
-            <option>Beratung</option>
-            <option>Anderes</option>
-          </select>
-        </div>
-        <div class="fg"><label>Ihre Nachricht</label><textarea id="f-nachricht" placeholder="Was kostet Sie heute am meisten Zeit?"></textarea></div>
-        <button class="btn-send" id="f-btn" onclick="sendForm(event)">Anfrage senden</button>
-        <p id="f-status" style="margin-top:1rem;font-size:0.82rem;text-align:center;color:rgba(242,236,224,0.5);min-height:1.4rem;"></p>
+
+        <aside class="hero__right">
+          <div class="card card--glass card--accent">
+            <div class="card__kicker">Fokus</div>
+            <div class="card__title">Struktur statt Handarbeit</div>
+            <p class="card__text">
+              Weniger manuelle Übergaben. Weniger Fehler. Klar definierte Abläufe, die zuverlässig im Hintergrund laufen.
+            </p>
+
+            <div class="grid4">
+              <div class="mini">
+                <div class="mini__h">Zeit</div>
+                <div class="mini__p">Automatisiert wiederkehrende Schritte.</div>
+              </div>
+              <div class="mini">
+                <div class="mini__h">Qualität</div>
+                <div class="mini__p">Kontrollen und klare Regeln.</div>
+              </div>
+              <div class="mini">
+                <div class="mini__h">Stabilität</div>
+                <div class="mini__p">Robust bei Wachstum und Komplexität.</div>
+              </div>
+              <div class="mini">
+                <div class="mini__h">Übergabe</div>
+                <div class="mini__p">Dokumentiert und wartbar.</div>
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<footer>
-  <a href="#" class="f-logo">Kismet <em>Solutions</em></a>
-  <ul class="f-nav">
-    <li><a href="#über">Über uns</a></li>
-    <li><a href="#leistungen">Leistungen</a></li>
-    <li><a href="#vorgehen">Vorgehen</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-  <span class="f-copy">&#169; 2025 Kismet Solutions &#xB7; St. Gallen</span>
-</footer>
+    <section class="media" aria-label="Visualisierung Automatisierung">
+      <div class="container">
+        <div class="media__frame media__frame--gif" style="position:relative;">
+          <canvas id="automation-canvas" style="position:absolute;inset:0;width:100%;height:100%;border-radius:22px;"></canvas>
+          <div class="media__overlay">
+            <div class="media__tag">Automatisierung</div>
+            <div class="media__title">Abläufe laufen im Hintergrund</div>
+            <div class="media__text">Wiederkehrende Aufgaben werden automatisch verarbeitet, überwacht und strukturiert ausgeführt.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script>
-emailjs.init("tPLY3ETNmnNTe07Xo");
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Struktur statt manuelle Prozesse.</h2>
+          <p>
+            In vielen Organisationen entstehen mit der Zeit komplexe Arbeitsabläufe. Daten werden mehrfach übertragen, Systeme sind nicht miteinander verbunden und wiederkehrende Aufgaben werden von Hand erledigt.
+          </p>
+          <p>
+            Das führt langfristig zu Fehlern, Abhängigkeiten und unnötigem Zeitaufwand.
+          </p>
+        </div>
 
-// Cursor
-var dot=document.getElementById("dot"),ring=document.getElementById("ring");
-var mx=0,my=0,rx=0,ry=0;
-document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;});
-(function L(){dot.style.left=mx+"px";dot.style.top=my+"px";rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(L);})();
+        <div class="card">
+          <p>
+            Wir entwickeln Systeme, die diese Prozesse standardisieren, automatisieren und stabilisieren.
+          </p>
+          <p>
+            Ziel ist eine digitale Infrastruktur, in der Aufgaben zuverlässig im Hintergrund ablaufen und Mitarbeitende sich auf ihre eigentliche Arbeit konzentrieren können.
+          </p>
+        </div>
+      </div>
+    </section>
 
-// Scroll reveal
-var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("in");});},{threshold:.07});
-document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+    <section class="media" aria-label="Visualisierung Daten und Integration">
+      <div class="container">
+        <div class="media__frame media__frame--code">
+          <img
+            class="media__img media__img--code"
+            src="assets/media/integration-code.png"
+            alt="Leuchtender Code als Symbol für Datenflüsse und Systemintegration"
+            loading="lazy"
+            data-parallax="true"
+          />
+          <div class="media__overlay">
+            <div class="media__tag">Daten und Integration</div>
+            <div class="media__title">Verbindungen zwischen Systemen</div>
+            <div class="media__text">Datenflüsse, Schnittstellen und automatische Übergaben sorgen für klare und stabile Prozesse.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// Nav active
-var nls=document.querySelectorAll(".nav-ul a");
-window.addEventListener("scroll",function(){var id="";document.querySelectorAll("section[id]").forEach(function(s){if(window.scrollY>=s.offsetTop-180)id=s.id;});nls.forEach(function(a){a.style.color=a.getAttribute("href")==="#"+id?"var(--ink)":"";}); },{passive:true});
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Leistungsschwerpunkte</h2>
+        </div>
 
-// FAQ
-function toggleFaq(btn){var item=btn.closest(".faq-item");var isOpen=item.classList.contains("open");document.querySelectorAll(".faq-item.open").forEach(function(el){el.classList.remove("open");});if(!isOpen)item.classList.add("open");}
+        <div class="cards3">
+          <div class="card">
+            <h3>Automatisierung operativer Abläufe</h3>
+            <p>
+              Automatisierung von wiederkehrenden Aufgaben, Datenverarbeitung und administrativen Prozessen. Bots übernehmen definierte Arbeitsschritte und reduzieren manuelle Eingriffe.
+            </p>
+          </div>
 
-// Form
-function sendForm(e){
-  e.preventDefault();
-  var btn=document.getElementById("f-btn");
-  var status=document.getElementById("f-status");
-  var vorname=document.getElementById("f-vorname").value.trim();
-  var nachricht=document.getElementById("f-nachricht").value.trim();
-  if(!vorname||!nachricht){status.style.color="rgba(220,80,60,0.9)";status.textContent="Bitte Vorname und Nachricht ausfullen.";return;}
-  btn.textContent="Wird gesendet...";btn.disabled=true;
-  emailjs.send("service_y0tl1ov","template_7gmvfie",{
-    from_name:vorname+" "+document.getElementById("f-nachname").value.trim(),
-    from_email:document.getElementById("f-email").value.trim(),
-    firma:document.getElementById("f-firma").value.trim()||"Keine Angabe",
-    anliegen:document.getElementById("f-anliegen").value,
-    nachricht:nachricht
-  }).then(function(){
-    document.getElementById("f-form").style.display="none";
-    document.getElementById("f-success").style.display="flex";
-  }).catch(function(){
-    btn.textContent="Anfrage senden";btn.disabled=false;
-    status.style.color="rgba(220,80,60,0.9)";status.textContent="Fehler. Schreiben Sie direkt: info@kismet-solutions.ch";
-  });
-}
+          <div class="card">
+            <h3>Systemintegration</h3>
+            <p>
+              Verbindung bestehender Softwarelösungen über klare Schnittstellen und definierte Datenflüsse. Systeme kommunizieren automatisch miteinander, ohne manuelle Übergaben.
+            </p>
+          </div>
 
-// Ueber canvas
-(function(){var c=document.getElementById("ueber-canvas");if(!c)return;var ctx=c.getContext("2d");var W,H,t=0;function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}rs();window.addEventListener("resize",rs);function draw(){ctx.clearRect(0,0,W,H);for(var i=0;i<4;i++){var cx2=W*.5+Math.sin(t*.3+i*1.2)*W*.12,cy2=H*.5+Math.cos(t*.25+i)*H*.1,r=100+i*80+Math.sin(t*.4+i)*18;ctx.beginPath();ctx.arc(cx2,cy2,r,0,Math.PI*2);ctx.strokeStyle="rgba(184,68,32,"+(0.055-i*0.01)+")";ctx.lineWidth=1;ctx.stroke();}t+=.005;requestAnimationFrame(draw);}draw();})();
+          <div class="card">
+            <h3>Datenvalidierung und Qualitätskontrolle</h3>
+            <p>
+              Automatisierte Prüfmechanismen stellen sicher, dass Daten vollständig, korrekt und konsistent verarbeitet werden.
+            </p>
+          </div>
 
-// Gear canvas
-(function(){var c=document.getElementById("gear-c");if(!c)return;var ctx=c.getContext("2d");var W,H,t=0;function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}rs();window.addEventListener("resize",rs);function gear(cx,cy,R,r,teeth,angle,col,alpha){ctx.save();ctx.translate(cx,cy);ctx.rotate(angle);ctx.beginPath();for(var i=0;i<teeth;i++){var a1=(i*2/teeth)*Math.PI,a2=((i*2+.6)/teeth)*Math.PI,a3=((i*2+1)/teeth)*Math.PI,a4=((i*2+1.6)/teeth)*Math.PI;if(i===0)ctx.moveTo(Math.cos(a1)*R,Math.sin(a1)*R);ctx.lineTo(Math.cos(a1)*R,Math.sin(a1)*R);ctx.lineTo(Math.cos(a2)*R,Math.sin(a2)*R);ctx.lineTo(Math.cos(a3)*r,Math.sin(a3)*r);ctx.lineTo(Math.cos(a4)*r,Math.sin(a4)*r);}ctx.closePath();ctx.strokeStyle="rgba("+col+","+alpha+")";ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(0,0,r*.38,0,Math.PI*2);ctx.strokeStyle="rgba("+col+","+(alpha*.5)+")";ctx.lineWidth=1;ctx.stroke();ctx.restore();}function draw(){ctx.clearRect(0,0,W,H);ctx.fillStyle="#14100a";ctx.fillRect(0,0,W,H);var cx=W/2,cy=H/2;gear(cx,cy,100,74,14,t,"184,68,32",.75);gear(cx-140,cy-5,64,46,9,-t*1.56,"220,200,180",.28);gear(cx+134,cy+6,60,44,8,-t*1.67,"220,200,180",.24);gear(cx-52,cy+116,48,34,7,t*2.08,"184,68,32",.38);gear(cx+72,cy-110,44,32,6,t*2.27,"184,68,32",.32);t+=.011;requestAnimationFrame(draw);}draw();})();
+          <div class="card">
+            <h3>Interne Tools</h3>
+            <p>
+              Entwicklung maßgeschneiderter Anwendungen, die interne Abläufe beschleunigen und Arbeitsprozesse vereinfachen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// Leistungen canvas
-(function(){var c=document.getElementById("leis-canvas");if(!c)return;var ctx=c.getContext("2d");var W,H,t=0;function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}rs();window.addEventListener("resize",rs);var G=58;function draw(){ctx.clearRect(0,0,W,H);var cols=Math.ceil(W/G),rows=Math.ceil(H/G);for(var r=0;r<=rows;r++)for(var cl=0;cl<=cols;cl++){var p=Math.sin(t+cl*.26+r*.4)*.5+.5;ctx.beginPath();ctx.arc(cl*G,r*G,1.6*p,0,Math.PI*2);ctx.fillStyle="rgba(184,68,32,"+(0.12*p)+")";ctx.fill();}t+=.02;requestAnimationFrame(draw);}draw();})();
+    <section class="media" aria-label="Visualisierung Bots und Systeme">
+      <div class="container">
+        <div class="media__frame media__frame--wide media__frame--systems" style="position:relative;">
+          <canvas id="bots-canvas" style="position:absolute;inset:0;width:100%;height:100%;border-radius:22px;"></canvas>
+          <div class="media__overlay">
+            <div class="media__tag">Bots und Systeme</div>
+            <div class="media__title">Von einzelnen Aufgaben bis zur gesamten Struktur</div>
+            <div class="media__text">Bots, Automatisierung und Systeme greifen zusammen und entlasten operative Arbeit dauerhaft.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// Strip canvas
-(function(){var c=document.getElementById("strip-canvas");if(!c)return;var ctx=c.getContext("2d");var W,H,t=0;function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}rs();window.addEventListener("resize",rs);function draw(){ctx.clearRect(0,0,W,H);for(var w=0;w<3;w++){ctx.beginPath();for(var x=0;x<=W;x+=4){var y=H*.5+Math.sin(x*.009+t+w*1.1)*H*.25+Math.sin(x*.02+t*1.3)*H*.08;if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.strokeStyle="rgba(184,68,32,"+(0.07-w*0.018)+")";ctx.lineWidth=1.5;ctx.stroke();}t+=.009;requestAnimationFrame(draw);}draw();})();
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Typische Projekte</h2>
+        </div>
 
-// Vorgehen canvas
-(function(){var c=document.getElementById("vg-canvas");if(!c)return;var ctx=c.getContext("2d");var W,H,pts=[];function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}rs();window.addEventListener("resize",function(){rs();init();});function init(){pts=[];for(var i=0;i<55;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.8+.5});}init();function draw(){ctx.clearRect(0,0,W,H);for(var i=0;i<pts.length;i++){var p=pts[i];for(var j=i+1;j<pts.length;j++){var q=pts[j];var d=Math.sqrt((p.x-q.x)*(p.x-q.x)+(p.y-q.y)*(p.y-q.y));if(d<115){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle="rgba(184,68,32,"+((1-d/115)*.07)+")";ctx.lineWidth=.8;ctx.stroke();}}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(184,68,32,0.2)";ctx.fill();p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}requestAnimationFrame(draw);}draw();})();
-</script>
+        <div class="card">
+          <ul class="list">
+            <li>Automatisierung von E-Mail- und Dokumentprozessen</li>
+            <li>Standardisierung von Outlook- und Archivabläufen</li>
+            <li>Verarbeitung und Validierung von Excel-Daten</li>
+            <li>Automatisiertes Reporting und Datenaufbereitung</li>
+            <li>Verbindung verschiedener Softwarelösungen via API und Systemintegration</li>
+            <li>Entwicklung interner Tools und Bots zur Prozess- und Workflow-Automatisierung</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Qualitätsstandard</h2>
+        </div>
+
+        <div class="card">
+          <p><strong>Definierter Projektumfang</strong><br>
+          Ziel, Regeln und Systemgrenzen werden vor der Umsetzung präzise festgelegt.</p>
+
+          <p><strong>Transparente Systemlogik</strong><br>
+          Systeme funktionieren nachvollziehbar und dokumentiert.</p>
+
+          <p><strong>Betriebsstabilität</strong><br>
+          Fehler werden erkannt, kontrolliert behandelt und nicht ignoriert.</p>
+
+          <p><strong>Strukturierte Übergabe</strong><br>
+          Dokumentation und klare Systemstruktur ermöglichen langfristigen Weiterbetrieb.</p>
+
+          <p>Vertrauliche Informationen werden ausschließlich im Rahmen der Anfrage verarbeitet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="request" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Anfrage</h2>
+          <p>
+            Senden Sie eine kurze Beschreibung mit Ziel, Kontext und den betroffenen Tools. Rückmeldung in der Regel innerhalb von ein bis zwei Werktagen.
+          </p>
+        </div>
+
+        <div class="midcta">
+          <div class="midcta__inner">
+            <div>
+              <div class="midcta__title">Projekt anfragen</div>
+              <div class="midcta__sub">E-Mail genügt. Ich melde mich mit einer klaren Einschätzung und dem nächsten Schritt.</div>
+            </div>
+
+            <div class="midcta__actions">
+              <a class="btn btn--primary" href="mailto:rejhankismet@gmail.com">E-Mail senden</a>
+              <a class="btn btn--ghost" href="tel:+41767966241">Anrufen</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>FAQ</h2>
+        </div>
+
+        <div class="card">
+          <p><strong>Für wen ist die Zusammenarbeit sinnvoll?</strong><br>
+          Für Organisationen oder Einzelpersonen mit wiederkehrenden Prozessen, mehreren eingesetzten Tools oder manuellen Übergaben.</p>
+
+          <p><strong>Wie wird der Aufwand bestimmt?</strong><br>
+          Nach Prüfung der Anfrage erfolgt eine transparente Einschätzung. Kleinere, klar definierte Projekte lassen sich schneller kalkulieren.</p>
+
+          <p><strong>Wie schnell erfolgt eine Rückmeldung?</strong><br>
+          In der Regel innerhalb von ein bis zwei Werktagen.</p>
+
+          <p><strong>Kann bestehende Software integriert oder verbessert werden?</strong><br>
+          Ja, sofern Zugriff, Struktur und Rahmenbedingungen geklärt sind.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Impressum</h2>
+        </div>
+
+        <div class="card">
+          <p>
+            Rejhan Kismetovic<br>
+            Schweiz<br>
+            E-Mail: rejhankismet@gmail.com<br>
+            Telefon: +41 76 796 62 41
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Datenschutz</h2>
+        </div>
+
+        <div class="card">
+          <p>Diese Website verwendet keine Tracking- oder Analyse-Tools.</p>
+          <p>Personenbezogene Daten werden ausschließlich verarbeitet, wenn per E-Mail oder Telefon Kontakt aufgenommen wird. Die Verarbeitung erfolgt ausschließlich zur Bearbeitung der Anfrage.</p>
+          <p>Es erfolgt keine Weitergabe an Dritte, sofern keine gesetzliche Verpflichtung besteht.</p>
+          <p>Betroffene Personen haben das Recht auf Auskunft, Berichtigung oder Löschung ihrer Daten, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__brand">
+          <span class="brand__dot"></span>
+           <span class="brand__name">Kismet Solutions</span>
+      </div>
+    </footer>
+  </main>
+
+  <script src="automation-animation.js"></script>
+  <script src="bots-animation.js"></script>
+  <script src="script.js"></script>
+  <script>initAutomationAnimation("automation-canvas");
+    initBotsAnimation("bots-canvas");</script>
 </body>
 </html>
